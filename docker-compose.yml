@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  web:
+    build: .  # 使用当前目录下的 Dockerfile 构建镜像
+    command: python manage.py runserver 0.0.0.0:8000  # 使用 Django 的开发服务器
+    volumes:
+      - .:/app  # 将当前目录挂载到容器内的 /app 目录
+    ports:
+      - "8000:8000"  # 映射容器的8000端口到宿主机的8000端口
+    environment:
+      - DEBUG=True  # 设置 Django 的 debug 模式为 True (开发环境设置为 True)
+    networks:
+      - app-network  # 使用自定义网络
+
+networks:
+  app-network:
+    driver: bridge  # 使用默认的 bridge 网络驱动
