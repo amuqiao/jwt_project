@@ -42,7 +42,6 @@ curl --location --request GET 'http://127.0.0.1:8000/api/me/' \
 
 # 重置数据
 ## 删除 db.sqlite3 文件并重建数据库
-1. 删除根目录 db.sqlite3文件 -> 执行 python manage.py migrate -> 重新部署docker
 ```
 # 查询容器id
 docker ps
@@ -59,7 +58,22 @@ rm /app/db.sqlite3
 python manage.py migrate
 ```
 
-1.2 
+## 使用 flush 命令清空数据
+```
+# 进入docker shell
+docker exec -it 7d535ce7dd22 /bin/bash
+
+#
+python manage.py flush
+
+#
+python manage.py migrate
+```
+
+## 通过 Volume（卷）来重置数据库
+```
+
+```
    
 
 
